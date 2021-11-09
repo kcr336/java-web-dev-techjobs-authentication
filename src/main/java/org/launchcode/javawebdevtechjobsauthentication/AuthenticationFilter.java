@@ -15,13 +15,15 @@ import java.util.List;
 
 public class AuthenticationFilter extends HandlerInterceptorAdapter {
 
-    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
+
 
     @Autowired
     UserRepository userRepository;
 
     @Autowired
     AuthenticationController authenticationController;
+
+    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -33,6 +35,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
             // returning true indicates that the request may proceed
             return true;
         }
+
 
         HttpSession session = request.getSession();
         User user = authenticationController.getUserFromSession(session);
